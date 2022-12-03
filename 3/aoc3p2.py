@@ -1,22 +1,15 @@
 with open('input') as file:
     lines = [line.rstrip() for line in file]
 
-groupMatches = []
-badges = []
-badgesGroup = []
 grouped = list(zip(*(iter(lines),) * 3))
+result = []
+sum = 0
 
 for group in grouped: 
-    for char in group[0]:
-        if char in group[1]:
-            groupMatches.append(char)
-
-    for char in group[2]:
-        if char in groupMatches and char not in badgesGroup:
-            badges.append(char)
-            badgesGroup.append(char)
-    groupMatches.clear()
-    badgesGroup.clear()
+    g0 = set(group[0])
+    g1 = set(group[1]) 
+    g2 = set(group[2])
+    result += g0.intersection(g1, g2)
 
 def getPriority(letter):
     if ((ord(letter)) > 96):
@@ -24,8 +17,8 @@ def getPriority(letter):
     elif (ord(letter) < 91):
       return (int(ord(letter)-38))    
 
-sum = 0
-for badge in badges:
-    sum += getPriority(badge)
+for x in result:
+    sum += getPriority(x)
 
 print(sum)
+
