@@ -20,14 +20,12 @@ def isVisible(x,y):
         visibleL = True
         visibleU = True
         visibleD = True
-        count = 0
         i = y+1
         while i < len(trees[0]): # right
             i += 1
             if trees[x][y] <= trees[x][i-1]:
                 visibleR = False
-            else:
-                count += 1
+
         i = y+1
         while i > 1: # left
             i -= 1
